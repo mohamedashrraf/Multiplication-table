@@ -3,7 +3,7 @@
 var p; // shortcut to reference prototypes
 var lib={};var ss={};var img={};
 lib.ssMetadata = [
-		{name:"index_atlas_1", frames: [[0,0,632,160]]}
+		{name:"index_atlas_1", frames: [[850,0,120,69],[634,0,214,95],[0,0,632,160]]}
 ];
 
 
@@ -27,9 +27,23 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_1 = function() {
+(lib.CachedBmp_3 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(0);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_12 = function() {
+	this.initialize(ss["index_atlas_1"]);
+	this.gotoAndStop(1);
+}).prototype = p = new cjs.Sprite();
+
+
+
+(lib.CachedBmp_1 = function() {
+	this.initialize(ss["index_atlas_1"]);
+	this.gotoAndStop(2);
 }).prototype = p = new cjs.Sprite();
 // helper functions:
 
@@ -82,6 +96,32 @@ if (reversed == null) { reversed = false; }
 	this._renderFirstFrame();
 
 }).prototype = getMCSymbolPrototype(lib.yes, new cjs.Rectangle(-2,-2,94,94), null);
+
+
+(lib.Symbol59 = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
+
+	// Layer_1
+	this.instance = new lib.CachedBmp_3();
+	this.instance.setTransform(25.15,4.85,0.5,0.5);
+
+	this.instance_1 = new lib.CachedBmp_12();
+	this.instance_1.setTransform(0,0,0.5,0.5);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = p = new cjs.MovieClip();
+p.nominalBounds = new cjs.Rectangle(0,0,107,47.5);
 
 
 (lib.no = function(mode,startPosition,loop,reversed) {
@@ -237,6 +277,7 @@ if (reversed == null) { reversed = false; }
 		this.stop();
 		
 		var gameStage = this;
+		
 		var questions = [];
 		var currentIndex = 0;
 		var currentCard, nextCard;
@@ -248,19 +289,21 @@ if (reversed == null) { reversed = false; }
 		gameStage.card_2.homeY = gameStage.card_2.y;
 		
 		gameStage.end.visible = false;
+		gameStage.resetBtn.visible = false;
 		
 		var queue = new createjs.LoadQueue();
 		queue.loadFile({ id: "questionsData", src: "data.json" });
 		queue.on("fileload", handleFileLoad);
 		queue.on("error", handleLoadError);
 		
+		// ======================
+		// ======================
 		function handleFileLoad(event) {
 		  if (event.item.id === "questionsData") {
 		    var data = event.result;
 		
 		    questions = shuffleArray(data.questions);
 		
-		    console.log("✅ JSON loaded successfully:", questions);
 		    startGame();
 		  }
 		}
@@ -274,8 +317,8 @@ if (reversed == null) { reversed = false; }
 		  stage.addChild(errorText);
 		  stage.update();
 		}
-		
-		// 🎯 دالة خلط عشوائي للأسئلة
+		// ======================
+		// ======================
 		function shuffleArray(arr) {
 		  for (let i = arr.length - 1; i > 0; i--) {
 		    let j = Math.floor(Math.random() * (i + 1));
@@ -284,14 +327,33 @@ if (reversed == null) { reversed = false; }
 		  return arr;
 		}
 		
+		// ======================
+		// ======================
 		function startGame() {
+		
+		  // إعادة الضبط
 		  currentIndex = 0;
-		  currentCard = gameStage.card_1;
-		  nextCard = gameStage.card_2;
+		  isAnimating = false;
+		
+		  gameStage.end.visible = false;
+		  gameStage.resetBtn.visible = false;
 		
 		  gameStage.card_1.visible = true;
 		  gameStage.card_2.visible = true;
-			
+		
+		  gameStage.yes.visible = true;
+		  gameStage.no.visible = true;
+		
+		  // إعادة مواضع الكروت
+		  gameStage.card_1.x = gameStage.card_1.homeX;
+		  gameStage.card_1.y = gameStage.card_1.homeY;
+		
+		  gameStage.card_2.x = gameStage.card_2.homeX;
+		  gameStage.card_2.y = gameStage.card_2.homeY;
+		
+		  currentCard = gameStage.card_1;
+		  nextCard = gameStage.card_2;
+		
 		  showQuestion(currentCard, questions[currentIndex]);
 		
 		  gameStage.setChildIndex(currentCard, gameStage.numChildren - 1);
@@ -302,31 +364,37 @@ if (reversed == null) { reversed = false; }
 		  gameStage.no.on("click", function() { handleAnswer(false); });
 		}
 		
+		// ======================
+		// ======================
 		function bringUItoFront() {
 		  gameStage.setChildIndex(gameStage.yes, gameStage.numChildren - 1);
 		  gameStage.setChildIndex(gameStage.no, gameStage.numChildren - 1);
+		  gameStage.setChildIndex(gameStage.resetBtn, gameStage.numChildren - 1);
 		  gameStage.setChildIndex(gameStage.end, gameStage.numChildren - 1);
 		}
 		
+		// ======================
+		// ======================
 		function handleAnswer(isYes) {
 		  if (isAnimating) return;
 		  checkAnswer(isYes);
 		}
 		
+		// ======================
+		// ======================
 		function showQuestion(card, questionData) {
-		  if (!card) return;
-		  card.x = card.homeX;
-		  card.y = card.homeY;
-		
 		  var qText = card.question_1 || card.question_2;
-		  if (qText) qText.text = questionData.text;
+		  qText.text = questionData.text;
 		}
 		
+		// ======================
+		// ======================
 		function checkAnswer(userAnswer) {
 		  isAnimating = true;
 		
 		  var q = questions[currentIndex];
 		  var correct = (userAnswer === q.correct);
+		
 		  var glowColor = correct ? "#00FF00" : "#FF0000";
 		  var moveX = correct ? 800 : -800;
 		
@@ -353,8 +421,11 @@ if (reversed == null) { reversed = false; }
 		    });
 		}
 		
+		// ======================
+		// ======================
 		function nextQuestion() {
 		  currentIndex++;
+		
 		  if (currentIndex >= questions.length) {
 		    showEndMessage();
 		    return;
@@ -365,22 +436,36 @@ if (reversed == null) { reversed = false; }
 		  nextCard = temp;
 		
 		  gameStage.setChildIndex(currentCard, gameStage.numChildren - 1);
-		
 		  bringUItoFront();
 		
 		  createjs.Tween.get(currentCard)
 		    .to({ x: currentCard.homeX, y: currentCard.homeY }, 400, createjs.Ease.quadOut);
 		}
 		
+		// ======================
+		// ======================
 		function showEndMessage() {
+		
 		  gameStage.card_1.visible = false;
 		  gameStage.card_2.visible = false;
 		  gameStage.yes.visible = false;
 		  gameStage.no.visible = false;
 		
 		  gameStage.end.visible = true;
+		  gameStage.resetBtn.visible = true;
 		
 		  bringUItoFront();
+		
+		 if (gameStage.resetBtn) {
+		  gameStage.resetBtn.addEventListener("click", resetGame);
+			}
+		}
+		
+		function resetGame() {
+		
+		  questions = shuffleArray(questions);
+		
+		  startGame();
 		}
 	}
 
@@ -388,6 +473,11 @@ if (reversed == null) { reversed = false; }
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
 
 	// Layer_2
+	this.resetBtn = new lib.Symbol59();
+	this.resetBtn.name = "resetBtn";
+	this.resetBtn.setTransform(519.1,343.1,1,1,0,0,0,53.6,23.9);
+	new cjs.ButtonHelper(this.resetBtn, 0, 1, 1);
+
 	this.end = new lib.end();
 	this.end.name = "end";
 	this.end.setTransform(524,153.8,1,1,0,0,0,158.1,23.2);
@@ -410,7 +500,7 @@ if (reversed == null) { reversed = false; }
 	this.card_2.name = "card_2";
 	this.card_2.setTransform(522,262.9,1,1,0,0,0,201.4,213.5);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.card_2},{t:this.card_1},{t:this.yes},{t:this.no},{t:this.end}]}).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.card_2},{t:this.card_1},{t:this.yes},{t:this.no},{t:this.end},{t:this.resetBtn}]}).wait(1));
 
 	this._renderFirstFrame();
 
@@ -425,7 +515,7 @@ lib.properties = {
 	color: "#EFFDFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/index_atlas_1.png?1763028347600", id:"index_atlas_1"}
+		{src:"images/index_atlas_1.png?1763038055515", id:"index_atlas_1"}
 	],
 	preloads: []
 };
