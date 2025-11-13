@@ -258,7 +258,6 @@ if (reversed == null) { reversed = false; }
 		  if (event.item.id === "questionsData") {
 		    var data = event.result;
 		
-		    // ✅ خلط الأسئلة عشوائياً
 		    questions = shuffleArray(data.questions);
 		
 		    console.log("✅ JSON loaded successfully:", questions);
@@ -270,8 +269,8 @@ if (reversed == null) { reversed = false; }
 		  console.log("❌ Error loading JSON:", e);
 		  var errorText = new createjs.Text("❌ Error loading JSON");
 		  errorText.textAlign = "center";
-		  errorText.x = stage.canvas.width / 2;
-		  errorText.y = stage.canvas.height / 2;
+		  errorText.x = stage.canvas.width / 4;
+		  errorText.y = stage.canvas.height / 4;
 		  stage.addChild(errorText);
 		  stage.update();
 		}
@@ -426,7 +425,7 @@ lib.properties = {
 	color: "#EFFDFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/index_atlas_1.png?1763028250172", id:"index_atlas_1"}
+		{src:"images/index_atlas_1.png?1763028347600", id:"index_atlas_1"}
 	],
 	preloads: []
 };
