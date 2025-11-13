@@ -257,7 +257,10 @@ if (reversed == null) { reversed = false; }
 		function handleFileLoad(event) {
 		  if (event.item.id === "questionsData") {
 		    var data = event.result;
-		    questions = data.questions;
+		
+		    // ✅ خلط الأسئلة عشوائياً
+		    questions = shuffleArray(data.questions);
+		
 		    console.log("✅ JSON loaded successfully:", questions);
 		    startGame();
 		  }
@@ -271,6 +274,15 @@ if (reversed == null) { reversed = false; }
 		  errorText.y = stage.canvas.height / 2;
 		  stage.addChild(errorText);
 		  stage.update();
+		}
+		
+		// 🎯 دالة خلط عشوائي للأسئلة
+		function shuffleArray(arr) {
+		  for (let i = arr.length - 1; i > 0; i--) {
+		    let j = Math.floor(Math.random() * (i + 1));
+		    [arr[i], arr[j]] = [arr[j], arr[i]];
+		  }
+		  return arr;
 		}
 		
 		function startGame() {
@@ -414,7 +426,7 @@ lib.properties = {
 	color: "#EFFDFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/index_atlas_1.png?1762959600120", id:"index_atlas_1"}
+		{src:"images/index_atlas_1.png?1763028250172", id:"index_atlas_1"}
 	],
 	preloads: []
 };
