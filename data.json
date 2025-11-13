@@ -1,9 +1,31 @@
 {
   "questions": [
-    { "text": "2 × 3 = 6",  "correct": true },
-    { "text": "3 × 3 = 10", "correct": false },
-    { "text": "4 × 5 = 20", "correct": true },
-    { "text": "2 × 1 = 3",  "correct": false },
-    { "text": "5 × 5 = 25", "correct": true }
+    {
+      "text": "2 × 3 = 6",
+      "correct": true,
+      "img": true,
+      "src": "images/apple.png"
+    },
+    {
+      "text": "3 × 3 = 9",
+      "correct": true,
+      "img": false
+    },
+    {
+      "text": "4 × 5 = 25",
+      "correct": true,
+      "img": false
+    },
+    {
+      "text": "2 × 1 = 3",
+      "correct": false,
+      "img": true,
+      "src": "images/orange.png"
+    },
+    {
+      "text": "5 × 5 = 30",
+      "correct": false,
+      "img": false
+    }
   ]
 }

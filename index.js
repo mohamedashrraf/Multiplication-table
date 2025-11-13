@@ -34,7 +34,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_12 = function() {
+(lib.CachedBmp_25 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
@@ -113,7 +113,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_3();
 	this.instance.setTransform(25.15,4.85,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_12();
+	this.instance_1 = new lib.CachedBmp_25();
 	this.instance_1.setTransform(0,0,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -158,6 +158,29 @@ if (reversed == null) { reversed = false; }
 }).prototype = getMCSymbolPrototype(lib.no, new cjs.Rectangle(-2,-2,94,94), null);
 
 
+(lib.mapHolder = function(mode,startPosition,loop,reversed) {
+if (loop == null) { loop = true; }
+if (reversed == null) { reversed = false; }
+	var props = new Object();
+	props.mode = mode;
+	props.startPosition = startPosition;
+	props.labels = {};
+	props.loop = loop;
+	props.reversed = reversed;
+	cjs.MovieClip.apply(this,[props]);
+
+	// Layer_2
+	this.shape = new cjs.Shape();
+	this.shape.graphics.f("rgba(51,51,51,0.004)").s().p("Egu3AjKMAAAhGTMBdvAAAMAAABGTg");
+	this.shape.setTransform(300,225);
+
+	this.timeline.addTween(cjs.Tween.get(this.shape).wait(1));
+
+	this._renderFirstFrame();
+
+}).prototype = getMCSymbolPrototype(lib.mapHolder, new cjs.Rectangle(0,0,600,450), null);
+
+
 (lib.end = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = true; }
 if (reversed == null) { reversed = false; }
@@ -192,6 +215,10 @@ if (reversed == null) { reversed = false; }
 	cjs.MovieClip.apply(this,[props]);
 
 	// Layer_1
+	this.imgHolder_2 = new lib.mapHolder();
+	this.imgHolder_2.name = "imgHolder_2";
+	this.imgHolder_2.setTransform(298,380.25,0.5,0.6667,0,0,0,300,225.2);
+
 	this.question_2 = new cjs.Text("", "25px 'Noto Sans SemiBold'");
 	this.question_2.name = "question_2";
 	this.question_2.textAlign = "center";
@@ -208,11 +235,11 @@ if (reversed == null) { reversed = false; }
 	this.shape_1.graphics.f("#FFFFFF").s().p("AojKHQhjAAAAhkIAAxGQAAhjBjgBIRHAAQBjABABBjIAARGQgBBkhjAAg");
 	this.shape_1.setTransform(201.4315,213.5246,3.1107,3.2975);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape},{t:this.question_2}]}).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape},{t:this.question_2},{t:this.imgHolder_2}]}).wait(1));
 
 	this._renderFirstFrame();
 
-}).prototype = getMCSymbolPrototype(lib.card2, new cjs.Rectangle(-1,-1,404.9,429.1), null);
+}).prototype = getMCSymbolPrototype(lib.card2, new cjs.Rectangle(-1,-1,449,531.1), null);
 
 
 (lib.card1 = function(mode,startPosition,loop,reversed) {
@@ -227,6 +254,10 @@ if (reversed == null) { reversed = false; }
 	cjs.MovieClip.apply(this,[props]);
 
 	// Layer_1
+	this.imgHolder_1 = new lib.mapHolder();
+	this.imgHolder_1.name = "imgHolder_1";
+	this.imgHolder_1.setTransform(299.85,380.25,0.5,0.6667,0,0,0,300,225.2);
+
 	this.question_1 = new cjs.Text("", "25px 'Noto Sans SemiBold'");
 	this.question_1.name = "question_1";
 	this.question_1.textAlign = "center";
@@ -243,11 +274,11 @@ if (reversed == null) { reversed = false; }
 	this.shape_1.graphics.f("#FFFFFF").s().p("AojKHQhjAAAAhkIAAxGQAAhjBjgBIRHAAQBjABABBjIAARGQgBBkhjAAg");
 	this.shape_1.setTransform(201.4315,213.5246,3.1107,3.2975);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape},{t:this.question_1}]}).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape},{t:this.question_1},{t:this.imgHolder_1}]}).wait(1));
 
 	this._renderFirstFrame();
 
-}).prototype = getMCSymbolPrototype(lib.card1, new cjs.Rectangle(-1,-1,404.9,429.1), null);
+}).prototype = getMCSymbolPrototype(lib.card1, new cjs.Rectangle(-1,-1,450.9,531.1), null);
 
 
 // stage content:
@@ -297,13 +328,10 @@ if (reversed == null) { reversed = false; }
 		queue.on("error", handleLoadError);
 		
 		// ======================
-		// ======================
 		function handleFileLoad(event) {
 		  if (event.item.id === "questionsData") {
 		    var data = event.result;
-		
 		    questions = shuffleArray(data.questions);
-		
 		    startGame();
 		  }
 		}
@@ -318,7 +346,6 @@ if (reversed == null) { reversed = false; }
 		  stage.update();
 		}
 		// ======================
-		// ======================
 		function shuffleArray(arr) {
 		  for (let i = arr.length - 1; i > 0; i--) {
 		    let j = Math.floor(Math.random() * (i + 1));
@@ -328,10 +355,8 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		// ======================
-		// ======================
 		function startGame() {
 		
-		  // إعادة الضبط
 		  currentIndex = 0;
 		  isAnimating = false;
 		
@@ -344,7 +369,6 @@ if (reversed == null) { reversed = false; }
 		  gameStage.yes.visible = true;
 		  gameStage.no.visible = true;
 		
-		  // إعادة مواضع الكروت
 		  gameStage.card_1.x = gameStage.card_1.homeX;
 		  gameStage.card_1.y = gameStage.card_1.homeY;
 		
@@ -357,14 +381,12 @@ if (reversed == null) { reversed = false; }
 		  showQuestion(currentCard, questions[currentIndex]);
 		
 		  gameStage.setChildIndex(currentCard, gameStage.numChildren - 1);
-		
 		  bringUItoFront();
 		
 		  gameStage.yes.on("click", function() { handleAnswer(true); });
 		  gameStage.no.on("click", function() { handleAnswer(false); });
 		}
 		
-		// ======================
 		// ======================
 		function bringUItoFront() {
 		  gameStage.setChildIndex(gameStage.yes, gameStage.numChildren - 1);
@@ -374,20 +396,55 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		// ======================
-		// ======================
 		function handleAnswer(isYes) {
 		  if (isAnimating) return;
 		  checkAnswer(isYes);
 		}
 		
 		// ======================
+		// 🔥 showQuestion — مُعدلة لتعمل مع imgHolder_1 و imgHolder_2
 		// ======================
 		function showQuestion(card, questionData) {
+		
 		  var qText = card.question_1 || card.question_2;
 		  qText.text = questionData.text;
+		
+		  // اختر imgHolder الصحيح حسب الكارت
+		  var holder;
+		
+		  if (card === gameStage.card_1) {
+		    holder = gameStage.card_1.imgHolder_1;
+		  } else if (card === gameStage.card_2) {
+		    holder = gameStage.card_2.imgHolder_2;
+		  }
+		
+		  // إزالة الصورة القديمة من الكارت
+		  holder.removeAllChildren();
+		
+		  // لو السؤال يحتوي صورة
+		  if (questionData.img === true && questionData.src) {
+		
+		      var bmp = new createjs.Bitmap(questionData.src);
+		
+		      bmp.image.onload = function () {
+		
+		          var scaleX = 300 / bmp.image.width;
+		          var scaleY = 300 / bmp.image.height;
+		          var scale = Math.min(scaleX, scaleY);
+		
+		          bmp.scaleX = bmp.scaleY = scale;
+		
+		          bmp.x = (200 - bmp.image.width * scale) / 2;
+		          bmp.y = (200 - bmp.image.height * scale) / 2;
+		
+		          holder.addChild(bmp);
+		          stage.update();
+		      };
+		  }
 		}
 		
 		// ======================
+		// 🔥 checkAnswer — تجهيز السؤال التالي دون حذف الصورة
 		// ======================
 		function checkAnswer(userAnswer) {
 		  isAnimating = true;
@@ -399,7 +456,10 @@ if (reversed == null) { reversed = false; }
 		  var moveX = correct ? 800 : -800;
 		
 		  if (currentIndex + 1 < questions.length) {
+		
+		    // تجهيز السؤال التالي بالكامل (نص + صورة)
 		    showQuestion(nextCard, questions[currentIndex + 1]);
+		
 		    nextCard.x = nextCard.homeX;
 		    nextCard.y = nextCard.homeY;
 		
@@ -422,6 +482,7 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		// ======================
+		// 🔥 nextQuestion — بدون showQuestion لأن السؤال جاهز
 		// ======================
 		function nextQuestion() {
 		  currentIndex++;
@@ -443,7 +504,6 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		// ======================
-		// ======================
 		function showEndMessage() {
 		
 		  gameStage.card_1.visible = false;
@@ -458,13 +518,11 @@ if (reversed == null) { reversed = false; }
 		
 		 if (gameStage.resetBtn) {
 		  gameStage.resetBtn.addEventListener("click", resetGame);
-			}
+		 }
 		}
 		
 		function resetGame() {
-		
 		  questions = shuffleArray(questions);
-		
 		  startGame();
 		}
 	}
@@ -505,7 +563,7 @@ if (reversed == null) { reversed = false; }
 	this._renderFirstFrame();
 
 }).prototype = p = new lib.AnMovieClip();
-p.nominalBounds = new cjs.Rectangle(832.1,336.9,-108.10000000000002,184.60000000000002);
+p.nominalBounds = new cjs.Rectangle(832.1,336.9,-61.60000000000002,242.60000000000002);
 // library properties:
 lib.properties = {
 	id: '7DC78C2C70768144A5F27A1E0EAE27C9',
@@ -515,7 +573,7 @@ lib.properties = {
 	color: "#EFFDFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/index_atlas_1.png?1763038055515", id:"index_atlas_1"}
+		{src:"images/index_atlas_1.png?1763042125921", id:"index_atlas_1"}
 	],
 	preloads: []
 };
