@@ -34,7 +34,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_25 = function() {
+(lib.CachedBmp_6 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
@@ -113,7 +113,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_3();
 	this.instance.setTransform(25.15,4.85,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_25();
+	this.instance_1 = new lib.CachedBmp_6();
 	this.instance_1.setTransform(0,0,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -217,7 +217,7 @@ if (reversed == null) { reversed = false; }
 	// Layer_1
 	this.imgHolder_2 = new lib.mapHolder();
 	this.imgHolder_2.name = "imgHolder_2";
-	this.imgHolder_2.setTransform(298,380.25,0.5,0.6667,0,0,0,300,225.2);
+	this.imgHolder_2.setTransform(298,322.25,0.5,0.6667,0,0,0,300,225.2);
 
 	this.question_2 = new cjs.Text("", "25px 'Noto Sans SemiBold'");
 	this.question_2.name = "question_2";
@@ -225,7 +225,7 @@ if (reversed == null) { reversed = false; }
 	this.question_2.lineHeight = 40;
 	this.question_2.lineWidth = 257;
 	this.question_2.parent = this;
-	this.question_2.setTransform(197.9,173.85);
+	this.question_2.setTransform(197.9,115.85);
 
 	this.shape = new cjs.Shape();
 	this.shape.graphics.f().s("#666666").ss(1,1,1).p("AojqHIRHAAQBkAAAABkIAARHQAABkhkAAIxHAAQhkAAAAhkIAAxHQAAhkBkAAg");
@@ -239,7 +239,7 @@ if (reversed == null) { reversed = false; }
 
 	this._renderFirstFrame();
 
-}).prototype = getMCSymbolPrototype(lib.card2, new cjs.Rectangle(-1,-1,449,531.1), null);
+}).prototype = getMCSymbolPrototype(lib.card2, new cjs.Rectangle(-1,-1,449,473.1), null);
 
 
 (lib.card1 = function(mode,startPosition,loop,reversed) {
@@ -256,7 +256,7 @@ if (reversed == null) { reversed = false; }
 	// Layer_1
 	this.imgHolder_1 = new lib.mapHolder();
 	this.imgHolder_1.name = "imgHolder_1";
-	this.imgHolder_1.setTransform(299.85,380.25,0.5,0.6667,0,0,0,300,225.2);
+	this.imgHolder_1.setTransform(299.85,323.25,0.5,0.6667,0,0,0,300,225.2);
 
 	this.question_1 = new cjs.Text("", "25px 'Noto Sans SemiBold'");
 	this.question_1.name = "question_1";
@@ -264,7 +264,7 @@ if (reversed == null) { reversed = false; }
 	this.question_1.lineHeight = 40;
 	this.question_1.lineWidth = 257;
 	this.question_1.parent = this;
-	this.question_1.setTransform(197.9,173.85);
+	this.question_1.setTransform(197.9,116.85);
 
 	this.shape = new cjs.Shape();
 	this.shape.graphics.f().s("#666666").ss(1,1,1).p("AojqHIRHAAQBkAAAABkIAARHQAABkhkAAIxHAAQhkAAAAhkIAAxHQAAhkBkAAg");
@@ -278,7 +278,7 @@ if (reversed == null) { reversed = false; }
 
 	this._renderFirstFrame();
 
-}).prototype = getMCSymbolPrototype(lib.card1, new cjs.Rectangle(-1,-1,450.9,531.1), null);
+}).prototype = getMCSymbolPrototype(lib.card1, new cjs.Rectangle(-1,-1,450.9,474.1), null);
 
 
 // stage content:
@@ -306,8 +306,8 @@ if (reversed == null) { reversed = false; }
 		createjs.Touch.enable(stage);
 		stage.mouseChildren = true;
 		this.stop();
-		
 		var gameStage = this;
+		
 		
 		var questions = [];
 		var currentIndex = 0;
@@ -402,14 +402,12 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		// ======================
-		// 🔥 showQuestion — مُعدلة لتعمل مع imgHolder_1 و imgHolder_2
 		// ======================
 		function showQuestion(card, questionData) {
 		
 		  var qText = card.question_1 || card.question_2;
 		  qText.text = questionData.text;
 		
-		  // اختر imgHolder الصحيح حسب الكارت
 		  var holder;
 		
 		  if (card === gameStage.card_1) {
@@ -418,10 +416,8 @@ if (reversed == null) { reversed = false; }
 		    holder = gameStage.card_2.imgHolder_2;
 		  }
 		
-		  // إزالة الصورة القديمة من الكارت
 		  holder.removeAllChildren();
 		
-		  // لو السؤال يحتوي صورة
 		  if (questionData.img === true && questionData.src) {
 		
 		      var bmp = new createjs.Bitmap(questionData.src);
@@ -444,7 +440,6 @@ if (reversed == null) { reversed = false; }
 		}
 		
 		// ======================
-		// 🔥 checkAnswer — تجهيز السؤال التالي دون حذف الصورة
 		// ======================
 		function checkAnswer(userAnswer) {
 		  isAnimating = true;
@@ -457,7 +452,6 @@ if (reversed == null) { reversed = false; }
 		
 		  if (currentIndex + 1 < questions.length) {
 		
-		    // تجهيز السؤال التالي بالكامل (نص + صورة)
 		    showQuestion(nextCard, questions[currentIndex + 1]);
 		
 		    nextCard.x = nextCard.homeX;
@@ -472,17 +466,22 @@ if (reversed == null) { reversed = false; }
 		
 		  currentCard.shadow = new createjs.Shadow(glowColor, 0, 0, 30);
 		
-		  createjs.Tween.get(currentCard)
-		    .to({ x: currentCard.homeX + moveX }, 600, createjs.Ease.quadInOut)
+		var tilt = correct ? 15 : -15;
+		
+		createjs.Tween.get(currentCard)
+		    .to({ x: currentCard.homeX + moveX, rotation: tilt }, 600, createjs.Ease.quadInOut)
 		    .call(function() {
 		      currentCard.shadow = null;
+		
+		      currentCard.rotation = 0;
+		
 		      isAnimating = false;
 		      nextQuestion();
 		    });
+		
 		}
 		
 		// ======================
-		// 🔥 nextQuestion — بدون showQuestion لأن السؤال جاهز
 		// ======================
 		function nextQuestion() {
 		  currentIndex++;
@@ -530,40 +529,43 @@ if (reversed == null) { reversed = false; }
 	// actions tween:
 	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1));
 
-	// Layer_2
+	// Layer_3
 	this.resetBtn = new lib.Symbol59();
 	this.resetBtn.name = "resetBtn";
 	this.resetBtn.setTransform(519.1,343.1,1,1,0,0,0,53.6,23.9);
 	new cjs.ButtonHelper(this.resetBtn, 0, 1, 1);
-
-	this.end = new lib.end();
-	this.end.name = "end";
-	this.end.setTransform(524,153.8,1,1,0,0,0,158.1,23.2);
-
-	this.no = new lib.no();
-	this.no.name = "no";
-	this.no.setTransform(465,474.45,1,1,0,0,0,45,45);
-	new cjs.ButtonHelper(this.no, 0, 1, 1);
 
 	this.yes = new lib.yes();
 	this.yes.name = "yes";
 	this.yes.setTransform(572,474.45,1,1,0,0,0,45,45);
 	new cjs.ButtonHelper(this.yes, 0, 1, 1);
 
+	this.no = new lib.no();
+	this.no.name = "no";
+	this.no.setTransform(465,474.45,1,1,0,0,0,45,45);
+	new cjs.ButtonHelper(this.no, 0, 1, 1);
+
+	this.end = new lib.end();
+	this.end.name = "end";
+	this.end.setTransform(524,153.8,1,1,0,0,0,158.1,23.2);
+
 	this.card_1 = new lib.card1();
 	this.card_1.name = "card_1";
 	this.card_1.setTransform(522,262.9,1,1,0,0,0,201.4,213.5);
 
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.card_1},{t:this.end},{t:this.no},{t:this.yes},{t:this.resetBtn}]}).wait(1));
+
+	// Layer_2
 	this.card_2 = new lib.card2();
 	this.card_2.name = "card_2";
 	this.card_2.setTransform(522,262.9,1,1,0,0,0,201.4,213.5);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.card_2},{t:this.card_1},{t:this.yes},{t:this.no},{t:this.end},{t:this.resetBtn}]}).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.card_2).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new lib.AnMovieClip();
-p.nominalBounds = new cjs.Rectangle(832.1,336.9,-61.60000000000002,242.60000000000002);
+p.nominalBounds = new cjs.Rectangle(832.1,336.9,-61.60000000000002,185.60000000000002);
 // library properties:
 lib.properties = {
 	id: '7DC78C2C70768144A5F27A1E0EAE27C9',
@@ -573,7 +575,7 @@ lib.properties = {
 	color: "#EFFDFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/index_atlas_1.png?1763042125921", id:"index_atlas_1"}
+		{src:"images/index_atlas_1.png?1763549005512", id:"index_atlas_1"}
 	],
 	preloads: []
 };
