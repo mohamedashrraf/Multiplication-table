@@ -34,7 +34,7 @@ lib.ssMetadata = [
 
 
 
-(lib.CachedBmp_6 = function() {
+(lib.CachedBmp_15 = function() {
 	this.initialize(ss["index_atlas_1"]);
 	this.gotoAndStop(1);
 }).prototype = p = new cjs.Sprite();
@@ -113,7 +113,7 @@ if (reversed == null) { reversed = false; }
 	this.instance = new lib.CachedBmp_3();
 	this.instance.setTransform(25.15,4.85,0.5,0.5);
 
-	this.instance_1 = new lib.CachedBmp_6();
+	this.instance_1 = new lib.CachedBmp_15();
 	this.instance_1.setTransform(0,0,0.5,0.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_1},{t:this.instance}]}).wait(1));
@@ -313,6 +313,7 @@ if (reversed == null) { reversed = false; }
 		var currentIndex = 0;
 		var currentCard, nextCard;
 		var isAnimating = false;
+		var CARD_MOVE_TIME = 500; 
 		
 		gameStage.card_1.homeX = gameStage.card_1.x;
 		gameStage.card_1.homeY = gameStage.card_1.y;
@@ -469,7 +470,14 @@ if (reversed == null) { reversed = false; }
 		var tilt = correct ? 15 : -15;
 		
 		createjs.Tween.get(currentCard)
-		    .to({ x: currentCard.homeX + moveX, rotation: tilt }, 600, createjs.Ease.quadInOut)
+		    .to(
+		        { 
+		          x: currentCard.homeX + moveX, 
+		          rotation: tilt 
+		        }, 
+		        CARD_MOVE_TIME, 
+		        createjs.Ease.sineInOut
+		    )
 		    .call(function() {
 		      currentCard.shadow = null;
 		
@@ -575,7 +583,7 @@ lib.properties = {
 	color: "#EFFDFF",
 	opacity: 1.00,
 	manifest: [
-		{src:"images/index_atlas_1.png?1763549005512", id:"index_atlas_1"}
+		{src:"images/index_atlas_1.png?1763560109456", id:"index_atlas_1"}
 	],
 	preloads: []
 };
